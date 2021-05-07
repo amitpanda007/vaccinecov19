@@ -1,0 +1,137 @@
+p {
+  margin: 0;
+}
+
+.item {
+    margin: 10px 0;
+    background: white;
+    color: black;
+  }
+
+  .subtitle {
+    color: #303f9f
+  }
+  
+  .session-card-content {
+    display: inline-flex;
+    flex-wrap: wrap;
+  }
+
+  .header {
+    font-size: x-large;
+    font-weight: bold;
+    border: black solid;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .session-card {
+    width: 115px;
+    margin: 3px;
+    border: #B15DFF solid 2px;
+    border-radius: 10px;
+  }
+  
+  .card-action-live {
+    display: inline-grid;
+    justify-content: center;
+    border-left: 1px black solid;
+  }
+  
+  .card-action-view {
+    display: inline-grid;
+    justify-content: start;
+    border-left: 1px black solid;
+  }
+
+  .highlight {
+    color: #FF6859;
+  }
+  
+  .available {
+    color: #045D56;
+  }
+
+  .btn-blue {
+    color: #303f9f;
+  }
+  
+  .btn-red {
+    color: #ad1457;
+  }
+  
+  .btn-badge {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    min-width: 0;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .toggle-btn {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+  
+  @media (max-width: 360px) {
+    .item {
+      width: 300px;
+      margin: 10px 0;
+    }
+  
+    .card-content {
+      display: inline-grid;
+      width: 299px;
+      border-bottom: 1px black solid;
+    }
+  
+    .card-action-live {
+      display: inherit;
+      justify-content: space-evenly;
+      width: 299px;
+      border-left: 0px black solid;
+      margin-top: 10px;
+    }
+  
+    .card-action-view {
+      display: flex;
+      justify-content: space-evenly;
+      width: 299px;
+      border-left: 0px black solid;
+      margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .item {
+      width: 300px;
+      margin: 10px 0;
+    }
+  
+    .card-content {
+      display: inline-grid;
+      width: 299px;
+      border-bottom: 1px black solid;
+    }
+  
+    .card-action-live {
+      display: inherit;
+      justify-content: space-evenly;
+      width: 299px;
+      border-left: 0px black solid;
+      margin-top: 10px;
+    }
+  
+    .card-action-view {
+      display: flex;
+      justify-content: space-evenly;
+      width: 299px;
+      border-left: 0px black solid;
+      margin-top: 10px;
+    }
+  }

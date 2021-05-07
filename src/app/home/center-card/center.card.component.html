@@ -1,0 +1,21 @@
+<mat-card class="item">
+    <mat-card-header>
+        <div mat-card-avatar class="header"><p>{{index}}</p></div>
+        <mat-card-title>{{ center.name }}</mat-card-title>
+        <mat-card-subtitle class="subtitle">{{ center.block_name}},{{ center.district_name}}, {{ center.state_name}}</mat-card-subtitle>
+        <mat-card-subtitle class="subtitle">{{ center.pincode}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="session-card-content">
+            <div *ngFor="let session of center.sessions" class="session-card">
+                <p><b>{{session.date}}</b>(<span class="highlight">{{session.min_age_limit}}+</span>)</p>
+                <p>Slots: <span
+                    [ngClass]="{'highlight': session.available_capacity == '0', 'available' : session.available_capacity > '0'}"
+                    >{{session.available_capacity}}</span>
+                </p>
+                <p>{{session.vaccine}}</p>
+            </div>
+        </div>
+    </mat-card-content>
+    
+</mat-card>

@@ -1,0 +1,59 @@
+<div class="search">
+  <input
+    class="search-input"
+    name="search"
+    type="text"
+    [readonly]="readonlyMode"
+    placeholder="Search with pincode to see data"
+    [(ngModel)]="searchTerm"
+    autocomplete="off"
+    (keydown.enter)="findCenters()"
+  />
+</div>
+
+<div class="state-group">
+  <mat-form-field appearance="fill" class="dropdown">
+    <mat-label>State</mat-label>
+    <mat-select (selectionChange)="stateSelected($event)">
+      <mat-option *ngFor="let state of states.states" [value]="state.state_id">
+        {{state.state_name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="dropdown">
+      <mat-label>District</mat-label>
+      <mat-select (selectionChange)="districtSelected($event)">
+        <mat-option *ngFor="let district of districts.districts" [value]="district.district_id">
+          {{district.district_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+</div>
+
+
+<div class="filters">
+    <mat-slide-toggle [(ngModel)]="is18to44" class="toggle-item" value="18+" (change)="onToggleChange()">Only 18-44</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="is45Plus" class="toggle-item" value="45+" (change)="onToggleChange()">Only 45+</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="isAvlSlots" class="toggle-item" value="AVL" (change)="onToggleChange()">Only Available Slots</mat-slide-toggle>
+</div>
+
+<div class="cards">
+  <center-card
+    *ngFor="let center of centerData.centers; let i = index"
+    [center]="center"
+    [index]=i
+  ></center-card>
+</div>
+
+<mat-card class="info-card" *ngIf="showCardInfo">
+  <div class="card-content">
+    <h3>This site is still in Beta</h3>
+    <p>For feature request/developer contact development team</p>
+    <p>Email: amitpanda210@gmail.com</p>
+  </div>
+</mat-card>
+
+<button mat-mini-fab color="accent" aria-label="Info" class="float-right" (click)="showInfoCard()">
+  <mat-icon>info</mat-icon>
+</button> 

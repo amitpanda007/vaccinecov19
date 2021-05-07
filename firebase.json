@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/covidvaccine",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
