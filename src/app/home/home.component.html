@@ -1,3 +1,5 @@
+<div class="notify">Check for available slots for next 28 days</div>
+
 <div class="search">
   <input
     class="search-input"
@@ -11,38 +13,87 @@
   />
 </div>
 
+<div class="middle">OR</div>
+
 <div class="state-group">
   <mat-form-field appearance="fill" class="dropdown">
     <mat-label>State</mat-label>
     <mat-select (selectionChange)="stateSelected($event)">
       <mat-option *ngFor="let state of states.states" [value]="state.state_id">
-        {{state.state_name}}
+        {{ state.state_name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="fill" class="dropdown">
-      <mat-label>District</mat-label>
-      <mat-select (selectionChange)="districtSelected($event)">
-        <mat-option *ngFor="let district of districts.districts" [value]="district.district_id">
-          {{district.district_name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-label>District</mat-label>
+    <mat-select (selectionChange)="districtSelected($event)">
+      <mat-option
+        *ngFor="let district of districts.districts"
+        [value]="district.district_id"
+      >
+        {{ district.district_name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
+<!-- <div class="filters">
+  <mat-slide-toggle
+    [(ngModel)]="is18to44"
+    class="toggle-item"
+    value="18+"
+    (change)="onToggleChange()"
+    >Only 18-44</mat-slide-toggle
+  >
+  <mat-slide-toggle
+    [(ngModel)]="is45Plus"
+    class="toggle-item"
+    value="45+"
+    (change)="onToggleChange()"
+    >Only 45+</mat-slide-toggle
+  >
+  <mat-slide-toggle
+    [(ngModel)]="isAvlSlots"
+    class="toggle-item"
+    value="AVL"
+    (change)="onToggleChange()"
+    >Only Available Slots</mat-slide-toggle
+  >
+</div> -->
 
 <div class="filters">
-    <mat-slide-toggle [(ngModel)]="is18to44" class="toggle-item" value="18+" (change)="onToggleChange()">Only 18-44</mat-slide-toggle>
-    <mat-slide-toggle [(ngModel)]="is45Plus" class="toggle-item" value="45+" (change)="onToggleChange()">Only 45+</mat-slide-toggle>
-    <mat-slide-toggle [(ngModel)]="isAvlSlots" class="toggle-item" value="AVL" (change)="onToggleChange()">Only Available Slots</mat-slide-toggle>
+  <mat-chip-list
+    class="my-chip"
+    aria-label="Filter selection"
+    [multiple]="isMultipleSelectable"
+  >
+    <mat-chip
+      [selected]="is18to44"
+      (selectionChange)="chipSelected('18-44')"
+      (click)="is18to44 = !is18to44"
+      >18-44</mat-chip
+    >
+    <mat-chip
+      [selected]="is45Plus"
+      (selectionChange)="chipSelected('45+')"
+      (click)="is45Plus = !is45Plus"
+      >45+</mat-chip
+    >
+    <mat-chip
+      [selected]="isAvlSlots"
+      (selectionChange)="chipSelected('ALL')"
+      (click)="isAvlSlots = !isAvlSlots"
+      >Open Slots</mat-chip
+    >
+  </mat-chip-list>
 </div>
 
 <div class="cards">
   <center-card
-    *ngFor="let center of centerData.centers; let i = index"
+    *ngFor="let center of filteredCenterData.centers; let i = index"
     [center]="center"
-    [index]=i
+    [index]="i"
   ></center-card>
 </div>
 
@@ -54,6 +105,12 @@
   </div>
 </mat-card>
 
-<button mat-mini-fab color="accent" aria-label="Info" class="float-right" (click)="showInfoCard()">
+<button
+  mat-mini-fab
+  color="accent"
+  aria-label="Info"
+  class="float-right"
+  (click)="showInfoCard()"
+>
   <mat-icon>info</mat-icon>
-</button> 
+</button>

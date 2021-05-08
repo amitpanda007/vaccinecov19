@@ -1,5 +1,4 @@
 .search {
-  padding-top: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -25,6 +24,12 @@
   margin-top: 2rem;
 }
 
+.middle {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
 .notify {
   display: flex;
   justify-content: center;
@@ -38,17 +43,17 @@
   width: 200px;
   height: 150px;
   position: fixed;
-  bottom: 100px;
-  right: 40px;
+  bottom: 50px;
+  right: 30px;
   margin: 5px;
 }
 
 .float-right {
   cursor: pointer;
   position: fixed;
-  bottom: 40px;
-  right: 40px;
-  margin: 5px;
+  bottom: 10px;
+  right: 10px;
+  margin: 3px;
   z-index: 2;
 }
 
@@ -60,64 +65,61 @@
   justify-content: center;
   margin-left: 10rem;
   margin-right: 10rem;
-  padding: 30px 0px;
+  padding: 10px 10px;
   border-radius: 20px;
   color: white;
-
 }
 
 .toggle-item {
-  margin-left: 2rem;
-
+  margin-left: 1rem;
 }
 
 .state-group {
   display: flex;
-  // background: #424242;
   align-items: center;
-  margin-top: 1rem;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
-::ng-deep .mat-form-field-wrapper{
+::ng-deep .mat-form-field-wrapper {
   margin-bottom: -1.25em;
-
 }
-
 
 .dropdown {
   width: 50%;
   background: #424242;
 }
 
+.my-chip .mat-chip-selected {
+  background-color: #68efad !important;
+  color: black !important;
+}
+
 @media (max-width: 360px) {
   .filters {
     background: #424242;
-    display: inline-block;
-    margin-top: 3rem;
+    display: flex;
+    margin-top: 1rem;
     align-items: center;
     justify-content: center;
-    margin-left: 0rem;
-    margin-right: 0rem;
-    padding: 5px 0px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 5px 5px;
     border-radius: 20px;
     color: white;
   }
-  
 }
 
-@media (max-width: 560px) 
-{
+@media (max-width: 700px) {
   .filters {
     background: #424242;
-    display: inline-block;
-    margin-top: 3rem;
+    display: flex;
+    margin-top: 1rem;
     align-items: center;
     justify-content: center;
-    margin-left: 0rem;
-    margin-right: 0rem;
-    padding: 30px 0px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 10px 10px;
     border-radius: 20px;
     color: white;
   }
