@@ -62,8 +62,8 @@
   margin-top: 1rem;
   align-items: center;
   justify-content: center;
-  margin-left: 10rem;
-  margin-right: 10rem;
+  margin-left: 30rem;
+  margin-right: 30rem;
   padding: 10px 10px;
   border-radius: 20px;
   color: white;
@@ -77,9 +77,8 @@
 .state-group {
   display: flex;
   align-items: center;
-  margin-left: 10rem;
-
-  margin-right: 10rem;
+  margin-left: 30rem;
+  margin-right: 30rem;
 }
 
 ::ng-deep .mat-form-field-wrapper {
@@ -126,6 +125,7 @@
     color: white;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
   }
+
   .state-group {
     display: flex;
     align-items: center;
@@ -147,6 +147,7 @@
     color: white;
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
   }
+
   .state-group {
     display: flex;
     align-items: center;
