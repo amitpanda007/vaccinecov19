@@ -72,19 +72,20 @@
       [selected]="is18to44"
       (selectionChange)="chipSelected('18-44')"
       (click)="is18to44 = !is18to44"
-      >18-44</mat-chip
+    >
+      <mat-icon *ngIf="is18to44">done</mat-icon>18-44</mat-chip
     >
     <mat-chip
       [selected]="is45Plus"
       (selectionChange)="chipSelected('45+')"
       (click)="is45Plus = !is45Plus"
-      >45+</mat-chip
+      ><mat-icon *ngIf="is45Plus">done</mat-icon>45+</mat-chip
     >
     <mat-chip
       [selected]="isAvlSlots"
       (selectionChange)="chipSelected('ALL')"
       (click)="isAvlSlots = !isAvlSlots"
-      >Open Slots</mat-chip
+      ><mat-icon *ngIf="isAvlSlots">done</mat-icon>Open Slots</mat-chip
     >
   </mat-chip-list>
 </div>

@@ -58,7 +58,6 @@
 }
 
 .filters {
-  background: #424242;
   display: flex;
   margin-top: 1rem;
   align-items: center;
@@ -68,6 +67,7 @@
   padding: 10px 10px;
   border-radius: 20px;
   color: white;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
 }
 
 .toggle-item {
@@ -90,9 +90,18 @@
   max-height: 65% !important;
 }
 
+::ng-deep .mat-form-field-label {
+  color: #424242 !important;
+}
+
+::ng-deep .mat-select-arrow {
+  color: #424242 !important;
+}
+
 .dropdown {
   width: 50%;
-  background: #424242;
+  border-radius: 10px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
 }
 
 .my-chip .mat-chip-selected {
@@ -102,7 +111,6 @@
 
 @media (max-width: 360px) {
   .filters {
-    background: #424242;
     display: flex;
     margin-top: 1rem;
     align-items: center;
@@ -112,6 +120,7 @@
     padding: 5px 5px;
     border-radius: 20px;
     color: white;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
   }
   .state-group {
     display: flex;
@@ -123,7 +132,6 @@
 
 @media (max-width: 700px) {
   .filters {
-    background: #424242;
     display: flex;
     margin-top: 1rem;
     align-items: center;
@@ -133,6 +141,7 @@
     padding: 10px 10px;
     border-radius: 20px;
     color: white;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
   }
   .state-group {
     display: flex;
