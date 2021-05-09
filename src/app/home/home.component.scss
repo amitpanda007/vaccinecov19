@@ -98,6 +98,10 @@
   color: #424242 !important;
 }
 
+::ng-deep .mat-select-value {
+  color: #424242 !important;
+}
+
 .dropdown {
   width: 50%;
   border-radius: 10px;
