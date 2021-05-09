@@ -89,7 +89,7 @@
   </mat-chip-list>
 </div>
 
-<div class="cards">
+<div class="cards" #screen>
   <center-card
     *ngFor="let center of filteredCenterData.centers; let i = index"
     [center]="center"

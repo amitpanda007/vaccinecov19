@@ -1,8 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
-import { BehaviorSubject } from 'rxjs';
-import { ErrorSnackbar, SuccessSnackbar } from '../common/snackbar.component';
+import { ErrorSnackbar } from '../common/snackbar.component';
 import { HomeService } from '../core/services/home.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class HomeComponent implements OnInit {
   public searchTerm: string = '';
   public readonlyMode: boolean = false;
   public showCardInfo = false;
-  // centerSubject = new BehaviorSubject([]);
   public states: any = [];
   public districts: any = [];
   public centerData: any = [];
@@ -43,6 +41,10 @@ export class HomeComponent implements OnInit {
   async findCenters() {
     this.filteredCenterData = [];
     this.centerData = [];
+    this.is18to44 = false;
+    this.is45Plus = false;
+    this.isAvlSlots = false;
+
     console.log(this.searchTerm);
     if (this.searchTerm.match(/^[1-9][0-9]{5}$/)) {
       this.centerData = await this.getCenterInfoByPin(this.searchTerm, '28');
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
       this._snackBar.openFromComponent(ErrorSnackbar, {
         data: 'Please Check the provided PINCODE',
         duration: 3000,
+        verticalPosition: 'top',
       });
     }
   }
@@ -178,11 +181,16 @@ export class HomeComponent implements OnInit {
 
   async filterByMinMaxAgeLimit(centerInfo, minAgeLimit, maxAgeLimit) {
     const localCenterInfo = centerInfo;
-    const filteredCenter = localCenterInfo.centers.filter(
-      (cent) =>
-        cent.sessions[0].min_age_limit >= minAgeLimit &&
-        cent.sessions[0].min_age_limit <= maxAgeLimit
-    );
+    const filteredCenter = localCenterInfo.centers.filter((cent) => {
+      if (cent.sessions && cent.sessions.length > 0) {
+        if (
+          cent.sessions[0].min_age_limit >= minAgeLimit &&
+          cent.sessions[0].min_age_limit <= maxAgeLimit
+        ) {
+          return true;
+        }
+      }
+    });
     let finalData = { centers: [] };
     finalData.centers = [...filteredCenter];
     return finalData;
@@ -279,11 +287,7 @@ export class HomeComponent implements OnInit {
             1
           );
         } else {
-          if (this.searchTerm) {
-            await this.findCenters();
-          } else {
-            this.gatherDistrictData();
-          }
+          this.gatherDataAgain();
         }
       } else {
         if (this.isAvlSlots) {
@@ -292,13 +296,19 @@ export class HomeComponent implements OnInit {
             1
           );
         } else {
-          if (this.searchTerm) {
-            await this.findCenters();
-          } else {
-            this.gatherDistrictData();
-          }
+          this.gatherDataAgain();
         }
       }
+    }
+    if (
+      this.filteredCenterData.centers &&
+      this.filteredCenterData.centers.length == 0
+    ) {
+      this._snackBar.openFromComponent(ErrorSnackbar, {
+        data: 'No centers found',
+        duration: 3000,
+        verticalPosition: 'top',
+      });
     }
   }
 
@@ -312,15 +322,22 @@ export class HomeComponent implements OnInit {
   async districtSelected($event) {
     this.filteredCenterData = [];
     this.centerData = [];
+    this.is18to44 = false;
+    this.is45Plus = false;
+    this.isAvlSlots = false;
     this.districtId = $event.value;
     this.centerData = await this.getDistrictCenterInfo(this.districtId, '28');
     this.filteredCenterData = this.centerData;
   }
 
-  async gatherDistrictData() {
+  async gatherDataAgain() {
     if (this.districtId) {
       this.centerData = await this.getDistrictCenterInfo(this.districtId, '28');
       this.filteredCenterData = this.centerData;
+    } else {
+      if (this.searchTerm) {
+        await this.findCenters();
+      }
     }
   }
 }
