@@ -10,6 +10,7 @@ import { HomeService } from '../core/services/home.service';
   styleUrls: ['home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  public loadingComplete: boolean = false;
   public searchTerm: string = '';
   public readonlyMode: boolean = false;
   public showCardInfo = false;
@@ -36,9 +37,11 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     this.states = await this.homeService.getStates();
     console.log(this.states);
+    this.loadingComplete = true;
   }
 
   async findCenters() {
+    this.loadingComplete = false;
     this.filteredCenterData = [];
     this.centerData = [];
     this.is18to44 = false;
@@ -49,12 +52,14 @@ export class HomeComponent implements OnInit {
     if (this.searchTerm.match(/^[1-9][0-9]{5}$/)) {
       this.centerData = await this.getCenterInfoByPin(this.searchTerm, '28');
       this.filteredCenterData = this.centerData;
+      this.loadingComplete = true;
     } else {
       this._snackBar.openFromComponent(ErrorSnackbar, {
         data: 'Please Check the provided PINCODE',
         duration: 3000,
         verticalPosition: 'top',
       });
+      this.loadingComplete = true;
     }
   }
 
@@ -143,6 +148,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getDistrictCenterInfo(districtId, days) {
+    this.loadingComplete = false;
     const locale = 'en-US';
     var centerList = [];
     var apiUrl;
@@ -152,6 +158,7 @@ export class HomeComponent implements OnInit {
         const today = new Date();
         const newDate = formatDate(today, 'dd-MM-yyyy', locale);
         console.log(`Today: ${newDate}`);
+        this.loadingComplete = true;
         return await this.homeService.getCenterDetailsByDistrict(
           districtId,
           newDate
@@ -172,6 +179,7 @@ export class HomeComponent implements OnInit {
             newCenters
           );
         }
+        this.loadingComplete = true;
         return centerList;
       }
     } catch (error) {
@@ -180,6 +188,7 @@ export class HomeComponent implements OnInit {
   }
 
   async filterByMinMaxAgeLimit(centerInfo, minAgeLimit, maxAgeLimit) {
+    this.loadingComplete = false;
     const localCenterInfo = centerInfo;
     const filteredCenter = localCenterInfo.centers.filter((cent) => {
       if (cent.sessions && cent.sessions.length > 0) {
@@ -193,6 +202,7 @@ export class HomeComponent implements OnInit {
     });
     let finalData = { centers: [] };
     finalData.centers = [...filteredCenter];
+    this.loadingComplete = true;
     return finalData;
   }
 
@@ -207,6 +217,7 @@ export class HomeComponent implements OnInit {
   }
 
   async filterByAvailableLimit(centerInfo, availableCapacity) {
+    this.loadingComplete = false;
     const localCenter = centerInfo;
     const finalData = { centers: [] };
     const centerData = [];
@@ -225,6 +236,7 @@ export class HomeComponent implements OnInit {
     );
     const finalCenterListNew = { centers: [] };
     finalCenterListNew.centers = [...finalCenterList];
+    this.loadingComplete = true;
     return finalCenterListNew;
   }
 
@@ -320,6 +332,7 @@ export class HomeComponent implements OnInit {
   }
 
   async districtSelected($event) {
+    this.loadingComplete = false;
     this.filteredCenterData = [];
     this.centerData = [];
     this.is18to44 = false;
@@ -328,6 +341,7 @@ export class HomeComponent implements OnInit {
     this.districtId = $event.value;
     this.centerData = await this.getDistrictCenterInfo(this.districtId, '28');
     this.filteredCenterData = this.centerData;
+    this.loadingComplete = true;
   }
 
   async gatherDataAgain() {
